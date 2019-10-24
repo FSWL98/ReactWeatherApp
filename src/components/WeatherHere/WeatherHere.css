@@ -1,0 +1,41 @@
+.weather-here h3 {
+    display: inline;
+}
+.weather-here {
+    border: 2px solid darkcyan;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 0 15px;
+}
+.weather-here button {
+    float: right;
+}
+.weather-here .flexbox{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+.weather-here--main div{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
+.weather-here section {
+    flex-grow: 1;
+}
+.weather-here--main span{
+    align-self: center;
+    font-size: 40px;
+    margin-left: 20px
+}
+.weather-here--secondary li {
+    background-color: gray;
+    margin-bottom: 10px;
+    color: white;
+    padding-left: 10px;
+}
+.weather-here--secondary li span {
+    float: right;
+    padding-right: 20px;
+}

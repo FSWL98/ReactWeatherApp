@@ -1,0 +1,63 @@
+.favorites {
+    padding: 5px;
+}
+.favorites input {
+    max-width: 200px;
+}
+.favorites form {
+    width: 310px;
+}
+.favorites h3 {
+    display: inline-block;
+    margin-left: 20px;
+}
+.favorites .favorites--items{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.favorites--head {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+.favorites--item {
+    flex-grow: 1;
+    flex-basis: 300px;
+    margin: 10px;
+    padding: 5px;
+    border: 2px solid darkcyan;
+    border-radius: 10px;
+}
+.favorites--item li {
+    background-color: gray;
+    margin-bottom: 10px;
+    color: white;
+    padding-left: 10px;
+}
+.favorites--item li span {
+    float: right;
+    padding-right: 20px;
+}
+
+.favorites--item--head {
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+}
+.favorites--item--head h5 {
+    padding: 15px 0;
+}
+.favorites--item--head button, span {
+    align-self: center;
+}
+.favorites--item--head span {
+    font-size: 20px;
+}
+.favorites--item  {
+    display: flex;
+    flex-direction: column;
+}
+.favorites--item button {
+    align-self: center;
+}
