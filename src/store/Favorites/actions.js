@@ -13,24 +13,3 @@ export const removeFavoriteCity = name => ({
     name
 })
 
-const requestData = name => ({
-    type: REQUEST_DATA,
-    name
-})
-
-export const receiveData = (name, data) => ({
-    type: RECEIVE_DATA,
-    name,
-    data
-})
-
-export function fetchData(name) {
-    return function(dispatch) {
-        dispatch(requestData(name))
-        return fetch('https://cors-anywhere.herokuapp.com/api.openweathermap.org/data/2.5/weather?q=' + name +
-            '&appid=b88ae6b1211078df478d7544a65d22f9')
-            .then(response => response.json(),
-                error => console.log('Error! ', error))
-            .then(data => dispatch(receiveData(name, data)))
-    }
-}
