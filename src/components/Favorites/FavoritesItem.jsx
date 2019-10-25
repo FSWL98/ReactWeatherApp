@@ -34,6 +34,10 @@ export default class FavoritesItem extends React.Component {
                     isLoaded: true
                 })
             })
+            .catch(() => this.setState({
+                isLoaded: true,
+                error: true
+            }))
     }
     componentDidMount() {
         this.makeRequest()
@@ -58,6 +62,14 @@ export default class FavoritesItem extends React.Component {
                             </div>
                         </div>
                     </div>
+        }
+        if (this.state.error) {
+            return <div className='favorites--item'>
+                    <div className='favorites--item--head'>
+                        <h5>Ошибка</h5>
+                        <button className='btn' onClick={() => buttonRemove(this.props.item.name)}>Х</button>
+                    </div>
+                </div>
         }
 
         return (

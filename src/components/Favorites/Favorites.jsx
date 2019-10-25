@@ -2,7 +2,7 @@ import  React from 'react'
 import './Favorites.css'
 import {connect} from 'react-redux'
 import FavoritesItem from "./FavoritesItem";
-import {addFavoriteCity, fetchData, removeFavoriteCity} from "../../store/Favorites/actions";
+import {addFavoriteCity, removeFavoriteCity} from "../../store/Favorites/actions";
 import {bindActionCreators} from "redux";
 
 class Favorites extends React.Component {
