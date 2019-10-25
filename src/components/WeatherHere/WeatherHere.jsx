@@ -1,7 +1,7 @@
 import React from 'react'
 import './WeatherHere.css'
 import WeatherHereMain from './WeatherHereMain'
-import WeatherHereSecondary from './WeatherHereSecondary'
+import WeatherBlockInfo from "../WeatherBlock/WeatherBlockInfo";
 
 export default class WeatherHere extends React.Component {
     constructor(props) {
@@ -99,7 +99,8 @@ export default class WeatherHere extends React.Component {
                 </button>
                 <div className='flexbox'>
                     <WeatherHereMain data={this.state.data}/>
-                    <WeatherHereSecondary data={this.state.data}/>
+                    <section><WeatherBlockInfo data={this.state.data}/></section>
+
                 </div>
             </section>
         );

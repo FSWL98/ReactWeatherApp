@@ -1,4 +1,5 @@
 import React from 'react'
+import WeatherBlockInfo from "../WeatherBlock/WeatherBlockInfo";
 
 export default class FavoritesItem extends React.Component {
     constructor(props) {
@@ -80,13 +81,7 @@ export default class FavoritesItem extends React.Component {
                     <span className='favorites--item--temperature'>{this.state.data.temp}&deg;C</span>
                     <button className='btn' onClick={() => buttonRemove(this.props.item.name)}>Х</button>
                 </div>
-                <ul>
-                    <li>Скорость ветра: <span>{this.state.data.wind} м/с</span></li>
-                    <li>Облачность: <span>{this.state.data.cloudiness}</span></li>
-                    <li>Влажность: <span>{this.state.data.humidity} %</span></li>
-                    <li>Двление: <span>{this.state.data.pressure} hpa</span></li>
-                    <li>Координаты: <span>[{this.state.data.lon}, {this.state.data.lat}]</span></li>
-                </ul>
+                <WeatherBlockInfo data={this.state.data}/>
                 <button className='btn' onClick={this.makeRequest}>Обновить</button>
             </div>
         );

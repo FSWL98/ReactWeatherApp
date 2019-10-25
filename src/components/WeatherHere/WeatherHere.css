@@ -29,13 +29,13 @@
     font-size: 40px;
     margin-left: 20px
 }
-.weather-here--secondary li {
+.weather-here li {
     background-color: gray;
     margin-bottom: 10px;
     color: white;
     padding-left: 10px;
 }
-.weather-here--secondary li span {
+.weather-here li span {
     float: right;
     padding-right: 20px;
 }
