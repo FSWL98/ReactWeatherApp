@@ -14,7 +14,7 @@ export default class WeatherBlockInfo extends React.Component {
                 <li>Облачность: <span>{data.cloudiness}</span></li>
                 <li>Влажность: <span>{data.humidity} %</span></li>
                 <li>Двление: <span>{data.pressure} hpa</span></li>
-                <li>Координаты: <span>[{data.lon}, {data.lat}]</span></li>
+                <li>Координаты: <span>[{data.lat}, {data.lon}]</span></li>
             </ul>
         );
     }

@@ -2,6 +2,7 @@ import React from 'react'
 import './WeatherHere.css'
 import WeatherHereMain from './WeatherHereMain'
 import WeatherBlockInfo from "../WeatherBlock/WeatherBlockInfo";
+import Preloader from "../Preloader/Preloader";
 
 export default class WeatherHere extends React.Component {
     constructor(props) {
@@ -49,7 +50,6 @@ export default class WeatherHere extends React.Component {
         })
             let url = 'https://cors-anywhere.herokuapp.com/api.openweathermap.org/data/2.5/weather?'
             if(lon && lat) {
-                console.log(this.state)
                 url += 'lat=' + lat + '&lon=' + lon
             }
             else {
@@ -60,7 +60,6 @@ export default class WeatherHere extends React.Component {
             fetch(url).then(response => response.json(), err => alert('city not found'))
                 .then(json => {
                     this.state.data = this.parseData(json)
-                    console.log(this.state.data)
                     this.setState({
                         isLoaded: true
                     })
@@ -74,21 +73,7 @@ export default class WeatherHere extends React.Component {
 
     render() {
         if (!this.state.isLoaded) {
-            return <div>
-                <div className="preloader-wrapper active">
-                    <div className="spinner-layer spinner-darkcyan-only">
-                        <div className="circle-clipper left">
-                            <div className="circle"/>
-                        </div>
-                        <div className="gap-patch">
-                            <div className="circle"/>
-                        </div>
-                        <div className="circle-clipper right">
-                            <div className="circle"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            return <Preloader/>
         }
 
         return (

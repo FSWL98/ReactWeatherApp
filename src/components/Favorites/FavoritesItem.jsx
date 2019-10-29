@@ -1,90 +1,59 @@
 import React from 'react'
 import WeatherBlockInfo from "../WeatherBlock/WeatherBlockInfo";
+import {getWeatherByCityName} from "../../store/Favorites/actions";
+import {connect} from "react-redux";
+import store from '../../store/index'
+import Preloader from "../Preloader/Preloader";
 
-export default class FavoritesItem extends React.Component {
+class FavoritesItem extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isLoaded: false,
-            data: null,
-            error: false
-        }
-        this.makeRequest = this.makeRequest.bind(this)
     }
-    parseData = data => ({
-        lon: data.coord.lon,
-        lat: data.coord.lat,
-        icon: data.weather[0].icon,
-        cloudiness: data.weather[0].description,
-        temp: Math.round(data.main.temp - 273.15),
-        humidity: data.main.humidity,
-        wind: data.wind.speed,
-        pressure: data.main.pressure
-    });
 
-    makeRequest() {
-        this.setState({
-            isLoaded: false
-        })
-        fetch('https://cors-anywhere.herokuapp.com/api.openweathermap.org/data/2.5/weather?q=' + this.props.item.name +
-            '&appid=b88ae6b1211078df478d7544a65d22f9').then(response => response.json(), err => alert('city not found'))
-            .then(json => {
-                this.state.data = this.parseData(json)
-                console.log(this.state.data)
-                this.setState({
-                    isLoaded: true
-                })
-            })
-            .catch(() => this.setState({
-                isLoaded: true,
-                error: true
-            }))
-    }
+
     componentDidMount() {
-        this.makeRequest()
+        this.props.getWeatherByCityName(this.props.name)
     }
 
     render() {
         const {buttonRemove} = this.props;
-
-        if (!this.state.isLoaded) {
-             return <div className='favorites--item'>
-                        <div className="preloader-wrapper active">
-                            <div className="spinner-layer spinner-darkcyan-only">
-                                <div className="circle-clipper left">
-                                <div className="circle"/>
-                                </div>
-                                <div className="gap-patch">
-                                <div className="circle"/>
-                                </div>
-                                <div className="circle-clipper right">
-                                    <div className="circle"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        const response = this.props.response.find(fav => fav.name === this.props.name )
+        if (!response.isLoaded) {
+             return <Preloader/>
         }
-        if (this.state.error) {
-            return <div className='favorites--item'>
+        if (response.isError) {
+            return (
+                <div className='favorites--item'>
                     <div className='favorites--item--head'>
-                        <h5>Ошибка</h5>
-                        <button className='btn' onClick={() => buttonRemove(this.props.item.name)}>Х</button>
+                        <h5>{this.props.name} {response.data}</h5>
+                        <button className='btn' onClick={() => buttonRemove(this.props.name)}>Х</button>
                     </div>
                 </div>
+            )
         }
 
         return (
             <div className='favorites--item'>
                 <div className='favorites--item--head'>
-                    <h5>{this.props.item.name}</h5>
-                    <img src={'http://openweathermap.org/img/wn/' + this.state.data.icon + '@2x.png'} alt='icon'/>
-                    <span className='favorites--item--temperature'>{this.state.data.temp}&deg;C</span>
-                    <button className='btn' onClick={() => buttonRemove(this.props.item.name)}>Х</button>
+                    <h5>{this.props.name}</h5>
+                    <img src={'http://openweathermap.org/img/wn/' + response.data.icon + '@2x.png'} alt='icon'/>
+                    <span className='favorites--item--temperature'>{response.data.temp}&deg;C</span>
+                    <button className='btn' onClick={() => buttonRemove(this.props.name)}>Х</button>
                 </div>
-                <WeatherBlockInfo data={this.state.data}/>
-                <button className='btn' onClick={this.makeRequest}>Обновить</button>
+                <WeatherBlockInfo data={response.data}/>
+                <button className='btn' onClick={() => this.props.getWeatherByCityName(this.props.name)}>Обновить</button>
             </div>
         );
     }
 }
+
+const mapStateToProps = (state, ownProps) => ({
+    response: state.api.items
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    getWeatherByCityName: (cityName) => dispatch(getWeatherByCityName(cityName))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(FavoritesItem)
 
