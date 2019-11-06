@@ -2,12 +2,10 @@ import {createStore, applyMiddleware} from "redux";
 import {rootReducer, initialState} from "./reducers";
 import thunk from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
-import {getWeatherByCityName} from "./Favorites/actions";
 
 const favorites = JSON.parse(localStorage.getItem('favorites'))
 
 if(favorites) {
-    initialState.favorites.favorites = favorites
     initialState.api.items = favorites
 }
 
@@ -17,7 +15,12 @@ const store = createStore(
     composeWithDevTools(applyMiddleware(thunk))
 )
 store.subscribe(() => {
-    localStorage.setItem('favorites', JSON.stringify(store.getState().favorites.favorites))
+    const result = []
+    store.getState().api.items.map((item) => {
+        result.push({ name: item.name})
+        }
+    )
+    localStorage.setItem('favorites', JSON.stringify(result))
 })
 
 export default store

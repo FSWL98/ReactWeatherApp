@@ -2,7 +2,6 @@ import React from 'react'
 import WeatherBlockInfo from "../WeatherBlock/WeatherBlockInfo";
 import {getWeatherByCityName} from "../../store/Favorites/actions";
 import {connect} from "react-redux";
-import store from '../../store/index'
 import Preloader from "../Preloader/Preloader";
 
 class FavoritesItem extends React.Component {
@@ -22,6 +21,7 @@ class FavoritesItem extends React.Component {
              return <Preloader/>
         }
         if (response.isError) {
+            setTimeout(() => buttonRemove(this.props.name), 5000);
             return (
                 <div className='favorites--item'>
                     <div className='favorites--item--head'>
@@ -47,7 +47,7 @@ class FavoritesItem extends React.Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
     response: state.api.items
 })
 

@@ -1,10 +1,10 @@
 import  React from 'react'
 import './Favorites.css'
 import {connect} from 'react-redux'
-import FavoritesItem from "./FavoritesItem";
+import FavoritesItem from "../FavoritesItem/FavoritesItem";
 import {addFavoriteCity, removeFavoriteCity} from "../../store/Favorites/actions";
 import {bindActionCreators} from "redux";
-import AddingForm from "./AddingForm";
+import AddingForm from "../AddingForm/AddingForm";
 
 class Favorites extends React.Component {
     constructor(props) {
@@ -30,7 +30,7 @@ class Favorites extends React.Component {
     }
 }
 const mapStateToProps = state => ({
-    favorites: state.favorites.favorites
+    favorites: state.api.items
 })
 
 const mapDispatchToProps = dispatch => ({
