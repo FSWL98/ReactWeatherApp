@@ -46,7 +46,7 @@ export const receiveFailed = (name, message) => ({
 export const getWeatherByCityName = cityName => {
     store.dispatch(requestData(cityName))
     return function (dispatch, getState) {
-        return fetch('https://cors-anywhere.herokuapp.com/api.openweathermap.org/data/2.5/weather?q=' + cityName +
+        return fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName +
             '&appid=b88ae6b1211078df478d7544a65d22f9')
             .then(res => res.json())
             .then(json => {

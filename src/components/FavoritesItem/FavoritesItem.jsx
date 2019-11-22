@@ -15,8 +15,7 @@ class FavoritesItem extends React.Component {
     }
 
     render() {
-        const {buttonRemove} = this.props;
-        const response = this.props.response.find(fav => fav.name === this.props.name )
+        const {buttonRemove, response} = this.props;
         if (!response.isLoaded) {
              return <Preloader/>
         }
@@ -25,7 +24,7 @@ class FavoritesItem extends React.Component {
             return (
                 <div className='favorites--item'>
                     <div className='favorites--item--head'>
-                        <h5>{this.props.name} {response.data}</h5>
+                        <h5>Город {this.props.name} не найден</h5>
                         <button className='btn' onClick={() => buttonRemove(this.props.name)}>Х</button>
                     </div>
                 </div>
@@ -47,8 +46,7 @@ class FavoritesItem extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    response: state.api.items
+const mapStateToProps = () => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({

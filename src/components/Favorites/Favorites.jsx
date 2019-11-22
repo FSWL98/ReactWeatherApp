@@ -14,7 +14,7 @@ class Favorites extends React.Component {
     render() {
 
         const favs = this.props.favorites.map((fav) =>
-            <FavoritesItem name={fav.name} buttonRemove={this.props.removeCity} key = {fav.name} />
+            <FavoritesItem name={fav.name} buttonRemove={this.props.removeCity} key = {fav.name} response = {fav}/>
         )
         return (
             <section className='favorites'>
