@@ -1,9 +1,13 @@
 import React from 'react'
 import Preloader from '../../components/Preloader/Preloader'
-import renderer from 'react-test-renderer'
+import {shallow} from 'enzyme'
+import Enzyme from "enzyme/build";
+import Adapter from "enzyme-adapter-react-16/build";
+Enzyme.configure({ adapter: new Adapter() })
 
-it('Preloader', () => {
-    const component = renderer.create(<Preloader/>);
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+describe('Preloader', () => {
+    it('renders correctly', () => {
+        const preloader = shallow(<Preloader/>);
+        expect(preloader).toMatchSnapshot();
+    })
 })
