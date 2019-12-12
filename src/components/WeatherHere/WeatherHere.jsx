@@ -11,7 +11,7 @@ export default class WeatherHere extends React.Component {
             isLoaded: false,
             data: null,
             cityName: 'Moscow'
-        }
+        };
         this.requestGeo = this.requestGeo.bind(this)
         this.makeRequest = this.makeRequest.bind(this)
     }
@@ -30,16 +30,13 @@ export default class WeatherHere extends React.Component {
 
     requestGeo() {
         if (navigator.geolocation) {
-            console.log('hello')
             const pos = navigator.geolocation.getCurrentPosition(position => {
                 this.makeRequest(position.coords.longitude, position.coords.latitude)
             }, err => {
-                alert('Геолокация отключена, будет выведен город по умолчанию')
                 this.makeRequest()
             })
         }
         else {
-            alert('Геолокация не поддерживается в вашем браузере, будет выведен город по умолчанию')
             this.makeRequest()
         }
     }
@@ -47,7 +44,7 @@ export default class WeatherHere extends React.Component {
     makeRequest(lon = null, lat = null) {
         this.setState({
             isLoaded: false
-        })
+        });
             let url = 'https://api.openweathermap.org/data/2.5/weather?'
             if(lon && lat) {
                 url += 'lat=' + lat + '&lon=' + lon
@@ -56,7 +53,6 @@ export default class WeatherHere extends React.Component {
                 url += 'q=' + this.state.cityName
             }
             url += '&appid=b88ae6b1211078df478d7544a65d22f9'
-            console.log(url)
             fetch(url).then(response => response.json(), err => alert('city not found'))
                 .then(json => {
                     this.state.data = this.parseData(json)
@@ -67,7 +63,6 @@ export default class WeatherHere extends React.Component {
 
     }
     componentDidMount() {
-
         this.requestGeo()
     }
 
@@ -85,7 +80,6 @@ export default class WeatherHere extends React.Component {
                 <div className='flexbox'>
                     <WeatherHereMain data={this.state.data}/>
                     <section><WeatherBlockInfo data={this.state.data}/></section>
-
                 </div>
             </section>
         );
