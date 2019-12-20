@@ -36,7 +36,7 @@ export class FavoritesItem extends React.Component {
                     <h5>{this.props.name}</h5>
                     <img src={'http://openweathermap.org/img/wn/' + response.data.icon + '@2x.png'} alt='icon'/>
                     <span className='favorites--item--temperature'>{response.data.temp}&deg;C</span>
-                    <button className='btn delete' onClick={() => buttonRemove(this.props.name)}>Х</button>
+                    <button className='btn delete' onClick={() => buttonRemove(this.props.name, this.props.key)}>Х</button>
                 </div>
                 <WeatherBlockInfo data={response.data}/>
                 <button className='btn update' onClick={() => this.props.getWeatherByCityName(this.props.name)}>Обновить</button>
@@ -46,11 +46,11 @@ export class FavoritesItem extends React.Component {
 }
 
 const mapStateToProps = () => ({
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
     getWeatherByCityName: (cityName) => dispatch(getWeatherByCityName(cityName))
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(FavoritesItem)
 

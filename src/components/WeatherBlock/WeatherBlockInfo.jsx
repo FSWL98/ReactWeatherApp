@@ -7,7 +7,7 @@ export default class WeatherBlockInfo extends React.Component {
     }
 
     render() {
-        const {data} = this.props
+        const {data} = this.props;
         return (
             <ul>
                 <li>Скорость ветра: <span>{data.wind} м/с</span></li>

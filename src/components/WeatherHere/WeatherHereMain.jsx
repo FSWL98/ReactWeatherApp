@@ -8,7 +8,7 @@ export default class WeatherHereMain extends React.Component {
 
 
     render() {
-        const {data} = this.props
+        const {data} = this.props;
 
         return (
             <section className="weather-here--main">

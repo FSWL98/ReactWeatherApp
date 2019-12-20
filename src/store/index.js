@@ -2,25 +2,19 @@ import {createStore, applyMiddleware} from "redux";
 import {rootReducer, initialState} from "./reducers";
 import thunk from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
+import {receiveAllFavs} from "./Favorites/actions";
 
-const favorites = JSON.parse(localStorage.getItem('favorites'))
-
-if(favorites) {
-    initialState.api.items = favorites
-}
+let items = [];
 
 const store = createStore(
     rootReducer,
     initialState,
     composeWithDevTools(applyMiddleware(thunk))
-)
-store.subscribe(() => {
-    const result = []
-    store.getState().api.items.map((item) => {
-        result.push({ name: item.name})
-        }
-    )
-    localStorage.setItem('favorites', JSON.stringify(result))
-})
+);
+
+fetch('http://localhost:3001/api/v1/favorites')
+    .then(res => res.json())
+    .then(json => store.dispatch(receiveAllFavs(json.data)))
+    .catch(err => console.log(err));
 
 export default store

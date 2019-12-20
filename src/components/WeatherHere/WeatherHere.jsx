@@ -12,7 +12,7 @@ export default class WeatherHere extends React.Component {
             data: null,
             cityName: 'Moscow'
         };
-        this.requestGeo = this.requestGeo.bind(this)
+        this.requestGeo = this.requestGeo.bind(this);
         this.makeRequest = this.makeRequest.bind(this)
     }
 
@@ -45,17 +45,16 @@ export default class WeatherHere extends React.Component {
         this.setState({
             isLoaded: false
         });
-            let url = 'https://api.openweathermap.org/data/2.5/weather?'
+            let url = '';
             if(lon && lat) {
-                url += 'lat=' + lat + '&lon=' + lon
+                url = `http://localhost:3001/api/v1/weather/coordinates?lat=${lat}&lon=${lon}`;
             }
             else {
-                url += 'q=' + this.state.cityName
+                url = `http://localhost:3001/api/v1/weather?cityName=${this.state.cityName}`;
             }
-            url += '&appid=b88ae6b1211078df478d7544a65d22f9'
             fetch(url).then(response => response.json(), err => alert('city not found'))
                 .then(json => {
-                    this.state.data = this.parseData(json)
+                    this.state.data = this.parseData(json.data);
                     this.setState({
                         isLoaded: true
                     })
