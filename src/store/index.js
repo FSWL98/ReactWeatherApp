@@ -14,7 +14,7 @@ const store = createStore(
 
 fetch('http://localhost:3001/api/v1/favorites')
     .then(res => res.json())
-    .then(json => store.dispatch(receiveAllFavs(json.data)))
+    .then(json => store.dispatch(receiveAllFavs(json.data ? json.data : [])))
     .catch(err => console.log(err));
 
 export default store

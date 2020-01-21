@@ -11,7 +11,7 @@ export const initialApiState = {
 export const apiReducer = (state = initialApiState, action) => {
     switch (action.type) {
         case ADD_FAVORITE_CITY:
-            if (state.items.find((el) => el.name === action.name)) {
+            if (state.items.find((el) => el.name.toLowerCase() === action.name.toLowerCase())) {
                 alert('Этот город уже есть в списке избранных');
                 return state
             }
